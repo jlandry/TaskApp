@@ -1,22 +1,23 @@
 extends layout
 block content
-  .row
-    .col-md-6.col-md-offset-3
-      .sign-up-form.form(action='/signUp', method='POST', role='form')
-        .form-group
-          label(for='signup-username') Username
-          input#signup-username.form-control(type='text', placeholder='Enter User Name', name='username')
-        .form-group
-          label(for='signup-email') Email address
-          input#signup-email.form-control(type='email', placeholder='Enter email', name='email')
-        .form-group
-          label(for='signup-password1') Password
-          input#signup-password1.form-control(type='password', placeholder='Password', name='password')
-        .form-group
-          label(for='signup-password2') Confirm Password
-          input#signup-password2.form-control(type='password', placeholder='Confirm Password', name='password_conf')
-        .checkbox
-          input(type='checkbox')
-          | Agreement
-          a(href='/agreement')
-        button.btn.btn-default(id='signup-btn', type='submit') Submit
+  div(ng-controller='AppCtrl')
+    .row
+      .col-md-6.col-md-offset-3
+        .sign-up-form.form(role='form')
+          .form-group
+            label(for='signup-username') Username
+            input#signup-username.form-control(ng-model='newUser.username', type='text', placeholder='Enter User Name', name='username')
+          .form-group
+            label(for='signup-email') Email address
+            input#signup-email.form-control(ng-model='newUser.email', type='email', placeholder='Enter email', name='email')
+          .form-group
+            label(for='signup-password1') Password
+            input#signup-password1.form-control(ng-model='newUser.password',type='password', placeholder='Password', name='password')
+          .form-group
+            label(for='signup-password2') Confirm Password
+            input#signup-password2.form-control(ng-model='newUser.password_conf', type='password', placeholder='Confirm Password', name='password_conf')
+          .checkbox
+            input(ng-model='agreement', type='checkbox')
+            | Agreement
+            a(href='/agreement')
+          button.btn.btn-default(ng-click='save( newUser )', id='signup-btn', type='submit') Submit

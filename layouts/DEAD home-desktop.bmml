@@ -1,0 +1,126 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1881" measuredH="720" mockupW="1281" mockupH="720">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="600" y="0" w="1280" h="720" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//www.Donteatadick.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="601" y="156" w="1280" h="247" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="-1"/>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Title" x="982" y="423" w="-1" h="-1" measuredW="559" measuredH="43" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>DON%27T%20EAT%20A%20DICK%20is%20simple...%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::TextArea" x="680" y="503" w="426" h="140" measuredW="200" measuredH="140" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Just%20don%27t%20eat%20it%21%20DON%27T%20EAT%20A%20DICK%20is%20a%20simple%20fun%20meal%20regiment%20application%20that%20is%20time%20based%20in%20helps%20you%20to%20regulate%20your%20meal%20times.%20You%20set%20how%20many%20meals%20per%20day%20and%20the%20interval%20of%20hours%20between%20them.%20It%27s%20basically%20a%20ticking%20bomb%20in%20which%20you%20must%20defuse%20at%20every%20meal%20by%20inputing%20what%20you%20recently%20ate.%20It%27ll%20then%20record%20what%20you%20ate%20and%20when%2C%20it%20will%20also%20display%20it%20for%20the%20world%20to%20see.%20However%20if%20you%20miss%20a%20meal%20time...%20congratulations%2C%20you%20just%20ate%20a%20dick%21%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::TextInput" x="1254" y="560" w="213" h="-1" measuredW="49" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <text>Name</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::SubTitle" x="1254" y="602" w="-1" h="-1" measuredW="512" measuredH="19" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>%3Cname%3E%20just%20ate%20a...%20%3Cfavorite%20food%3E%21%20Next%20meal%20in%20%3Ccount%20down%20clock%3E</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::TextInput" x="1482" y="560" w="284" h="-1" measuredW="93" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <text>Favorite%20Food</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::SubTitle" x="1301" y="503" w="-1" h="-1" measuredW="246" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>How%20The%20world%20Sees%20It</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Button" x="1722" y="99" w="-1" h="-1" measuredW="75" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>SIGN%20UP</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::LinkBar" x="1541" y="103" w="-1" h="-1" measuredW="166" measuredH="19" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Home%2C%20Dashboard%2C%20Login</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Title" x="680" y="91" w="-1" h="-1" measuredW="127" measuredH="43" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>D.E.A.D</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::SubTitle" x="822" y="103" w="-1" h="-1" measuredW="204" measuredH="19" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>a%20simple%2C%20meal-regiment%20app</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::SubTitle" x="680" y="211" w="-1" h="-1" measuredW="517" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Kingtak%20just%20ate%20a...%20Pizza%21%20Next%20meal%20in%202%3A32%3A55</text>
+      </controlProperties>
+    </control>
+    <control controlID="20" controlTypeID="com.balsamiq.mockups::SubTitle" x="680" y="282" w="-1" h="-1" measuredW="517" measuredH="27" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Kingtak%20just%20ate%20a...%20Pizza%21%20Next%20meal%20in%202%3A32%3A55</text>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::SubTitle" x="680" y="318" w="-1" h="-1" measuredW="517" measuredH="27" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Kingtak%20just%20ate%20a...%20Pizza%21%20Next%20meal%20in%202%3A32%3A55</text>
+      </controlProperties>
+    </control>
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::SubTitle" x="680" y="354" w="-1" h="-1" measuredW="517" measuredH="27" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Kingtak%20just%20ate%20a...%20Pizza%21%20Next%20meal%20in%202%3A32%3A55</text>
+      </controlProperties>
+    </control>
+    <control controlID="28" controlTypeID="com.balsamiq.mockups::SubTitle" x="680" y="246" w="-1" h="-1" measuredW="517" measuredH="27" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Kingtak%20just%20ate%20a...%20Pizza%21%20Next%20meal%20in%202%3A32%3A55</text>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::SubTitle" x="680" y="176" w="-1" h="-1" measuredW="517" measuredH="27" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Kingtak%20just%20ate%20a...%20Pizza%21%20Next%20meal%20in%202%3A32%3A55</text>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::SubTitle" x="1280" y="211" w="-1" h="-1" measuredW="517" measuredH="27" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Kingtak%20just%20ate%20a...%20Pizza%21%20Next%20meal%20in%202%3A32%3A55</text>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::SubTitle" x="1280" y="246" w="-1" h="-1" measuredW="517" measuredH="27" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Kingtak%20just%20ate%20a...%20Pizza%21%20Next%20meal%20in%202%3A32%3A55</text>
+      </controlProperties>
+    </control>
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::SubTitle" x="1280" y="282" w="-1" h="-1" measuredW="517" measuredH="27" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Kingtak%20just%20ate%20a...%20Pizza%21%20Next%20meal%20in%202%3A32%3A55</text>
+      </controlProperties>
+    </control>
+    <control controlID="34" controlTypeID="com.balsamiq.mockups::SubTitle" x="1280" y="176" w="-1" h="-1" measuredW="517" measuredH="27" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Kingtak%20just%20ate%20a...%20Pizza%21%20Next%20meal%20in%202%3A32%3A55</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::SubTitle" x="1280" y="316" w="-1" h="-1" measuredW="517" measuredH="27" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Kingtak%20just%20ate%20a...%20Pizza%21%20Next%20meal%20in%202%3A32%3A55</text>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::SubTitle" x="1280" y="350" w="-1" h="-1" measuredW="517" measuredH="27" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Kingtak%20just%20ate%20a...%20Pizza%21%20Next%20meal%20in%202%3A32%3A55</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

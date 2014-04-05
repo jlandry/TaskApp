@@ -42,15 +42,16 @@ var auth = null;
 
 
 
+/**************************************
+			* signUp.jade
+ *************************************/
 
-/* ###### SIGNUP ###### */
-
-// apt.get signUp.jade //
+// apt.get( '/signUp' ) //
 exports.signUp = function( req, res ) {
 	res.render( 'signUp' );
 };
 
-// apt.post signUp.jade //
+// apt.post( '/signUp' ) //
 exports.newUser = function ( req, res ) {
 
 	// New Users Account Information
@@ -160,14 +161,16 @@ exports.newUser = function ( req, res ) {
 
 
 
-/* ###### LOGIN ###### */
+/********************************
+			* login.jade
+ ********************************/
 
-// apt.get login.jade //
+// apt.get( '/login' ) //
 exports.login = function ( req, res ) {
 	res.render( 'login' );
 };
 
-// apt.post login.jade //
+// apt.post( '/login' ) //
 exports.verifyLogin = function ( req, res ) {
 
 	var user		= req.body.username;
@@ -200,8 +203,12 @@ exports.verifyLogin = function ( req, res ) {
 
 
 
-/* ###### LOGOUT ###### */
 
+/********************************
+			* logout
+ ********************************/
+
+// apt.get( '')
 exports.logout = function ( req, res ) {
 	req.session.destroy();
 	res.redirect( '/login' );

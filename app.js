@@ -1,7 +1,7 @@
 
-/**
- * Module dependencies
- */
+/****************************
+	* Module dependencies
+ *****************************/
 
 var express	= require( 'express' ),
 	routes	= require( './routes/index' ),
@@ -13,9 +13,10 @@ var express	= require( 'express' ),
 var app			= module.exports = express();
 var mongoose	= require( 'mongoose' );
 
-/**
- * Configuration
- */
+
+/****************************
+		* Configuration
+ *****************************/
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -39,24 +40,31 @@ if (app.get('env') === 'production') {
 }
 
 
-/**
- * Handles Sessions
- */
+
+/****************************
+	* Sessions Handler
+ *****************************/
 app.use( express.cookieParser() );
 app.use( express.session( { secret : 'kingtak' } ));
 
 
-/**
- * Routes
- */
 
-/* index.js */
+/**************************************************
+					* Route Handler
+ **************************************************/
+
+
+/**************************
+		* index.js
+ **************************/
 
 app.get( '/', routes.index );
 app.get( '/dashboard', routes.dashboard );
 
 
-/* users.js */
+/**************************
+		* users.js
+ **************************/
 
 app.get( '/signUp', users.signUp );
 app.get( '/login', users.login );
@@ -65,7 +73,9 @@ app.get( '/logout', users.logout );
 app.post( '/signUp', users.newUser );
 app.post( '/login', users. verifyLogin );
 
-/* api.js */
+/**************************
+		* api.js
+ **************************/
 
 app.get('/api/name', api.name);
 
@@ -76,13 +86,14 @@ app.get('/api/name', api.name);
 
 
 
-// // redirect all others to the index (HTML5 history)
-app.get('*', routes.index);
+// redirect all others to the index (HTML5 history)
+// app.get('*', routes.index);
 
 
-/**
- * Start Server
- */
+
+/****************************
+	* Start Server
+ *****************************/
 
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
