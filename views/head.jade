@@ -1,0 +1,18 @@
+.nav-bar.row
+  ul.top-right-navbar
+    li.home-button
+      a( href='/' ) Home |
+    li.dashboard-button
+      a( href='/dashboard') Dashboard |
+    li
+      - if ( loggedIn )
+        a( href='/logout') Log out
+      - else 
+        a( href='/login' ) Log in
+    li.sign-up-button
+      a( href='/signUp' ) SignUp
+  .top-left-navbar
+    .logo-navbar
+      a( href='/' )
+      h1 LOGO 
+      p a simple, meal-regiment app

@@ -3,14 +3,15 @@
  * Module dependencies
  */
 
-var express = require('express'),
-  routes = require('./routes'),
-  api = require('./routes/api'),
-  http = require('http'),
-  path = require('path');
+var express	= require( 'express' ),
+	routes	= require( './routes/index' ),
+	users	= require( './routes/users' ),
+	api		= require( './routes/api' ),
+	http	= require( 'http' ),
+	path	= require( 'path' );
 
-var app = module.exports = express();
-
+var app			= module.exports = express();
+var mongoose	= require( 'mongoose' );
 
 /**
  * Configuration
@@ -26,6 +27,7 @@ app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
+
 // development only
 if (app.get('env') === 'development') {
   app.use(express.errorHandler());
@@ -38,17 +40,43 @@ if (app.get('env') === 'production') {
 
 
 /**
+ * Handles Sessions
+ */
+app.use( express.cookieParser() );
+app.use( express.session( { secret : 'kingtak' } ));
+
+
+/**
  * Routes
  */
 
-// serve index and view partials
-app.get('/', routes.index);
-app.get('/partials/:name', routes.partials);
+/* index.js */
 
-// JSON API
+app.get( '/', routes.index );
+app.get( '/dashboard', routes.dashboard );
+
+
+/* users.js */
+
+app.get( '/signUp', users.signUp );
+app.get( '/login', users.login );
+app.get( '/logout', users.logout );
+
+app.post( '/signUp', users.newUser );
+app.post( '/login', users. verifyLogin );
+
+/* api.js */
+
 app.get('/api/name', api.name);
 
-// redirect all others to the index (HTML5 history)
+
+
+
+
+
+
+
+// // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
 

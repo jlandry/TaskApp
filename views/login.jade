@@ -1,0 +1,15 @@
+extends layout
+block content
+  .row
+    .col-md-6.col-md-offset-3
+      .login-form.form(role='form')
+        .form-group
+          label(for='login-username') Username
+          input#login-username.form-control(type='text', placeholder='Enter User Name')
+        .form-group
+          label(for='login-password') Password
+          input#login-password.form-control(type='password', placeholder='Password')
+          .login-signup-btn
+            a( href='/signUp')
+              p Sign Up?
+        button.btn.btn-default(id='login-btn', type='submit') Submit

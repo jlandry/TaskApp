@@ -1,0 +1,75 @@
+/* ###### head.jade ###### */
+
+.nav-bar.row {
+  width: 90%;
+}
+.logo-navbar {
+  float: left;
+  display: inline;
+}
+ul.top-right-navbar {
+  list-style: none;
+  float: right;
+  li {
+    display: inline;
+    margin-right: 10px;
+  }
+}
+
+/* ###### login.jade ###### */
+.login-form.form {
+  width: 80%;
+  margin: auto;
+}
+.login-signup-btn {
+  float: right;
+}
+/* ###### signUp.jade ###### */
+
+.sign-up-form.form {
+  width: 80%;
+  margin: auto;
+}
+
+/* ###### login.jade ###### */
+
+
+
+
+
+
+
+
+/**
+ * Media Queries 
+ */
+
+/* ########### Large desktop ########### */
+
+
+@media (min-width: 1200px) {
+
+}// large screens 
+
+
+
+
+/* ########### Portrait tablet to landscape and desktop ########### */
+
+@media (min-width: 768px) and (max-width: 979px) {
+
+}// medium screens
+
+
+/* ########### Landscape phone to portrait tablet ########### */
+
+@media (max-width: 767px) {
+
+}// smedium
+
+
+/* ########### Landscape phones and down########### */
+
+@media (max-width: 480px) {
+
+}// max-width 640px, small screens
