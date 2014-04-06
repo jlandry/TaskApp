@@ -4,10 +4,9 @@ block content
     .row.col-md-6.col-md-offset-3
       .sign-up-form
         form(name="signUpForm", ng-submit='saveUser( newUser )', role='form', novalidate)
-          .form-group(ng-class='{ \'has-error\' : newUser.username.$invalid && !newUser.username.$pristine }')
+          .form-group
             label(for='signup-username') Username
             input#signup-username.form-control(ng-model='newUser.username', type='text', placeholder='Enter User Name', name='username', ng-required='true')
-            p.help-block(ng-show='newUser.username.$error && !newUser.username.$pristine') A User Name is required
             p.help-block(ng-show='newUser.username.length < 3') Username is too short
             p.help-block(ng-show='newUser.username.length > 3 * 4') Username is too long
           .form-group
@@ -22,6 +21,16 @@ block content
             label(for='signup-password2') Confirm Password
             input#signup-password2.form-control(ng-model='newUser.password_conf', type='password', placeholder='Confirm Password', name='password_conf', required='required')
             p.help-block(ng-show="newUser.password_conf.length < 4") Password is too short
+          .form-group
+            labl(for='signup-numMeals') Number of Meals Per Day
+            input#signup-numMeals.form-control(ng-model='newUser.numMeals', type='number', placeholder='# of meals', required='required')
+            p.help-block(ng-show="newUser.numMeals < 1") You need to eat at least one meal today
+            p.help-block(ng-show="newUser.numMeals > 12") That's too many meals for one day
+          .form-group
+            labl(for='signup-numHours') Number of Hours Between Meals
+            input#signup-numHours.form-control(ng-model='newUser.numHours', type='number', placeholder='# of hours between meals', required='required')
+            p.help-block(ng-show="newUser.numHours < 1") You need to eat at least one meal today
+            p.help-block(ng-show="newUser.numHours > 12") That's too many meals for one day
           .checkbox
             input(ng-model='agreement', type='checkbox', required='required')
             | Agree to possibly eating a dick

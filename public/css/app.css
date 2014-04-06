@@ -40,6 +40,12 @@ ul.top-right-navbar li {
   margin: auto;
 }
 
+/* line 33, ../../sass/app.scss */
+.sliderExample {
+  border: 1px solid #f0f0f0;
+  margin: 2em;
+}
+
 /* ###### login.jade ###### */
 /**
  * Media Queries 

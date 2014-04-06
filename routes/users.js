@@ -14,6 +14,8 @@ var User = mongoose.Schema({
 	username		: String,
 	email			: String,
 	password		: String,
+	numMeals		: Number,
+	numHours		: Number,
 	createdAt		: {
 
 		type	: Date,
@@ -66,6 +68,8 @@ exports.newUser = function ( req, res ) {
 	var newUserEmail		= req.body.email;
 	var newUserPassword		= req.body.password;
 	var newUserPasswordConf	= req.body.password_conf;
+	var newUserNumMeals		= req.body.numMeals;
+	var newUserNumHours		= req.body.numHours;
 	var errors				= [];
 
 	// Validates email input for "@", ".com" //
@@ -141,6 +145,8 @@ exports.newUser = function ( req, res ) {
 								username		: newUserName,
 								email			: newUserEmail,
 								password		: newUserPassword,
+								numMeals		: newUserNumMeals,
+								numHours		: newUserNumHours,
 								createdAt		: {
 									type	: Date,
 									default	: Date.now()
