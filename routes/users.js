@@ -1,3 +1,8 @@
+
+/**************************************
+			* mongoose
+ *************************************/
+
 var mongoose	= require('mongoose');
 
 // connects to MongoDB //
@@ -6,10 +11,10 @@ mongoose.connect( 'mongodb://localhost/zombs');
 // User account information //
 var User = mongoose.Schema({
 
-	user		: String,
-	email		: String,
-	password	: String,
-	createdAt	: {
+	username		: String,
+	email			: String,
+	password		: String,
+	createdAt		: {
 
 		type	: Date,
 		default	: Date.now
@@ -51,11 +56,13 @@ exports.signUp = function( req, res ) {
 	res.render( 'signUp' );
 };
 
+
+
 // apt.post( '/signUp' ) //
 exports.newUser = function ( req, res ) {
 
 	// New Users Account Information
-	var newUser				= req.body.username;
+	var newUserName			= req.body.username;
 	var newUserEmail		= req.body.email;
 	var newUserPassword		= req.body.password;
 	var newUserPasswordConf	= req.body.password_conf;
@@ -70,7 +77,7 @@ exports.newUser = function ( req, res ) {
 	}
 
 	// Validations //
-	if ( newUser === '' ) {
+	if ( newUserName === '' ) {
 		errors.push( 'Please choose a User Name' );
 	}
 	if ( newUserEmail === '' ) {
@@ -85,15 +92,15 @@ exports.newUser = function ( req, res ) {
 	if ( errors.length === 0 ) {
 	
 		// Verify Username is Available
-		User.findOne({
-			username : newUser
+		Users.findOne({
+			username : newUserName
 		},
 		function( err, user) {
 
 			if ( err ) console.log( 'Error '+err );
 
 			// Validates if User Name against DB !taken //
-			if ( user !== null && newUser === user.username ) {
+			if ( user !== null && newUserName === user.username ) {
 				errors.push( 'That User Name is already taken...' );
 			}
 			// Validates Email is right form //
@@ -108,7 +115,7 @@ exports.newUser = function ( req, res ) {
 			if ( errors.length > 0 ) {
 				res.send( errors.join('<br/>') );
 			} else {
-				User.findOne({ email : newUserEmail },
+				Users.findOne({ email : newUserEmail },
 					function( err, user ) {
 
 						if ( err ) console.log( 'Error ' + err );
@@ -118,12 +125,12 @@ exports.newUser = function ( req, res ) {
 						}
 						if ( errors.length === 0 ) {
 
-							// Everything is good, SAVE //
+							// If everything is good, SAVE //
 
 							// Saves new user to DB //
-							var newRegisteredUser = new User({
+							var newRegisteredUser = new Users({
 
-								username		: newUser,
+								username		: newUserName,
 								email			: newUserEmail,
 								password		: newUserPassword,
 								createdAt		: {

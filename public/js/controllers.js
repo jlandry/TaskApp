@@ -1,49 +1,38 @@
 'use strict';
 
-/* Controllers */
+/**************************************
+            * Controllers
+ *************************************/
 
+ angular.module( 'myApp.controllers', [] ).
+  controller('AppCtrl', function ( $scope, $http ) {
+    
+    // Saves newUsers from signUp.jade to mongo( User ) //
 
-angular.module( 'myApp.controllers', [] ).
-  controller( 'AppCtrl', function ( $scope, $http ) {
+    $scope.saveUser = function( newUser ) {
 
-    $http.get( '/signUp' ).
-      success ( function ( data, status, headers, config ) {
+      console.log( newUser );
+      
+      $http.post( '/signup', newUser ).
+        success( function ( data, status, headers, config ) {
 
-        $scope.newUser = data;
+          var existing = $scope.saveUser;
 
-      }).
-      error( function ( data, status, headers, config ) {
+          angular.element( document.querySelector( '.sign-up-form' ) ).val( "" );
 
-        $scope.newUser = [{
+        }).
+        error( function ( data, status, headers, config ) {
 
-          user      : data,
-          email     : data,
-          password  : data,
-          createdAt : Date.now()
+          $scope.newUser = [{
 
-        }];
+            user      : data,
+            email     : data,
+            password  : data,
+            createdAt : Date.now()
+          
+          }];
 
-      });
-
-      $scope.save = function ( newUser ) {
-
-        $http.
-      }
+        });
+      };
 
   });
-
-
-    $http.post( '', newUser ).
-      success( function ( data, status, headers, config) {
-
-        var existing = $scope.newUser;
-
-      }).
-      error( function ( data, status, headers, config) {
-
-        $scope.newUser = [{
-
-
-        }];
-      });
-  }
