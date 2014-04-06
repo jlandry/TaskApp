@@ -1,23 +1,28 @@
 extends layout
 block content
-  div(ng-controller='AppCtrl')
-    .row
-      .col-md-6.col-md-offset-3
-        .sign-up-form.form(role='form')
-          .form-group
+  div(ng-controller='SignUpCtrl')
+    .row.col-md-6.col-md-offset-3
+      .sign-up-form
+        form(name="signUpForm", ng-submit='saveUser( newUser )', role='form', novalidate)
+          .form-group(ng-class='{ \'has-error\' : newUser.username.$invalid && !newUser.username.$pristine }')
             label(for='signup-username') Username
-            input#signup-username.form-control(ng-model='newUser.username', type='text', placeholder='Enter User Name', name='username')
+            input#signup-username.form-control(ng-model='newUser.username', type='text', placeholder='Enter User Name', name='username', ng-required='true')
+            p.help-block(ng-show='newUser.username.$error && !newUser.username.$pristine') A User Name is required
+            p.help-block(ng-show='newUser.username.length < 3') Username is too short
+            p.help-block(ng-show='newUser.username.length > 3 * 4') Username is too long
           .form-group
             label(for='signup-email') Email address
-            input#signup-email.form-control(ng-model='newUser.email', type='email', placeholder='Enter email', name='email')
+            input#signup-email.form-control(ng-model='newUser.email', type='email', placeholder='Enter email', name='email', required='required')
+            p.help-block(ng-show="newUser.email.$invalid && !newUser.email.$pristine") Enter a valid email
           .form-group
             label(for='signup-password1') Password
-            input#signup-password1.form-control(ng-model='newUser.password',type='password', placeholder='Password', name='password')
+            input#signup-password1.form-control(ng-model='newUser.password',type='password', placeholder='Password', name='password', ng-minlength='4', required='required')
+            p.help-block(ng-show="newUser.password.length < 4") Password is too short
           .form-group
             label(for='signup-password2') Confirm Password
-            input#signup-password2.form-control(ng-model='newUser.password_conf', type='password', placeholder='Confirm Password', name='password_conf')
+            input#signup-password2.form-control(ng-model='newUser.password_conf', type='password', placeholder='Confirm Password', name='password_conf', required='required')
+            p.help-block(ng-show="newUser.password_conf.length < 4") Password is too short
           .checkbox
-            input(ng-model='agreement', type='checkbox')
-            | Agreement
-            a(href='/agreement')
-          button.btn.btn-default(ng-click='saveUser( newUser )', id='signup-btn', type='submit') Submit
+            input(ng-model='agreement', type='checkbox', required='required')
+            | Agree to possibly eating a dick
+          button.btn.btn-default(id='signup-btn', type='submit', ng-disabled="signUpForm.$invalid") Submit

@@ -4,15 +4,18 @@
             * Controllers
  *************************************/
 
+// signUp.jade form validation, ajax call, & saves to mongodb //
+
  angular.module( 'myApp.controllers', [] ).
-  controller('AppCtrl', function ( $scope, $http ) {
+  controller('SignUpCtrl', function ( $scope, $http ) {
     
     // Saves newUsers from signUp.jade to mongo( User ) //
 
     $scope.saveUser = function( newUser ) {
 
+      // Logs form information in JSON
       console.log( newUser );
-      
+
       $http.post( '/signup', newUser ).
         success( function ( data, status, headers, config ) {
 

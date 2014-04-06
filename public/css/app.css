@@ -35,7 +35,7 @@ ul.top-right-navbar li {
 
 /* ###### signUp.jade ###### */
 /* line 29, ../../sass/app.scss */
-.sign-up-form.form {
+.sign-up-form {
   width: 80%;
   margin: auto;
 }
