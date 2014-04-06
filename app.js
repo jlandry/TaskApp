@@ -71,7 +71,7 @@ app.get( '/login', users.login );
 app.get( '/logout', users.logout );
 
 app.post( '/signUp', users.newUser );
-app.post( '/login', users. verifyLogin );
+app.post( '/login', users.verifyLogin );
 
 /**************************
 		* api.js

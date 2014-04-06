@@ -6,7 +6,7 @@ block content
         form(name="signUpForm", ng-submit='saveUser( newUser )', role='form', novalidate)
           .form-group
             label(for='signup-username') Username
-            input#signup-username.form-control(ng-model='newUser.username', type='text', placeholder='Enter User Name', name='username', ng-required='true')
+            input#signup-username.form-control(ng-model='newUser.username', type='text', placeholder='Enter User Name', name='username', required='required')
             p.help-block(ng-show='newUser.username.length < 3') Username is too short
             p.help-block(ng-show='newUser.username.length > 3 * 4') Username is too long
           .form-group
@@ -33,5 +33,6 @@ block content
             p.help-block(ng-show="newUser.numHours > 12") That's too many meals for one day
           .checkbox
             input(ng-model='agreement', type='checkbox', required='required')
-            | Agree to possibly eating a dick
+            a(href='/agreement')
+              p Agree to possibly eating a dick
           button.btn.btn-default(id='signup-btn', type='submit', ng-disabled="signUpForm.$invalid") Submit

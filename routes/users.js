@@ -194,30 +194,35 @@ exports.login = function ( req, res ) {
 // apt.post( '/login' ) //
 exports.verifyLogin = function ( req, res ) {
 
-	var user		= req.body.username;
-	var password	= req.body.password;
+	var oldUser		= req.body.username;
+	var oldPassword	= req.body.password;
 
-	if ( user === "kingtak" ) {
+	Users.findOne({ username : oldUser },
+		function ( err, user ) {
 
-		if ( password === "kingtak" ) {
+			if ( err ) console.log( 'Error ' + err );
 
-			req.session.name	= user;
-			req.send({ redirect : '/dashboard' });
-			return;
+			console.log( user );
 
-		} else {
+			if ( user !== null && oldUser === user.username ) {
 
-			res.send( 'wrong Password' );
-			return;
+				if ( user.password !== null && oldPassword === user.password) {
 
-		}
-	
-	} else {
+					req.session.name = user;
+					req.send({ redirect : '/dashboard' });
+					return;
 
-		res.send( "Wrong User Name" );
-		return;
+				} else {
 
-	}
+					res.send( 'Wrong Password' );
+				}
+			} else {
+
+				res.send( 'Wrong User Name' );
+
+			}
+
+		});
 
 };// exports.verifyLogin
 

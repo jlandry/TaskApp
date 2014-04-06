@@ -1,15 +1,18 @@
 extends layout
 block content
-  .row
-    .col-md-6.col-md-offset-3
-      .login-form.form(role='form')
-        .form-group
-          label(for='login-username') Username
-          input#login-username.form-control(type='text', placeholder='Enter User Name')
-        .form-group
-          label(for='login-password') Password
-          input#login-password.form-control(type='password', placeholder='Password')
-          .login-signup-btn
-            a( href='/signUp')
-              p Sign Up?
-        button.btn.btn-default(id='login-btn', type='submit') Submit
+  div(ng-controller='LoginCtrl')
+    .row
+      .login-form.col-md-6.col-md-offset-3
+        form(name="loginForm", ng-submit='checkUser( oldUser )', role='form', novalidate)
+          .form-group
+            label(for='login-username') Username
+            input#login-username.form-control(ng-model='oldUser.username', type='text', placeholder='Enter User Name', name='username', required='required')
+            p.help-block(ng-show='oldUser.username.length < 3') Please Input Your Username
+          .form-group
+            label(for='login-password') Password
+            input#login-password.form-control(ng-model='oldUser.password', type='password', placeholder='Password', name='password', required='required')
+            p.help-block(ng-show='oldUser.password.length < 5') Please Input Your Password
+            .login-signup-btn
+              a( href='/signUp')
+                p Sign Up?
+          button.btn.btn-default(id='login-btn', type='submit', ng-disabled="signUpForm.$invalid") Submit

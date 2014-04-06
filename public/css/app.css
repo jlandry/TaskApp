@@ -23,7 +23,7 @@ ul.top-right-navbar li {
 
 /* ###### login.jade ###### */
 /* line 20, ../../sass/app.scss */
-.login-form.form {
+.login-form {
   width: 80%;
   margin: auto;
 }
