@@ -159,13 +159,14 @@ exports.newUser = function ( req, res ) {
 							newRegisteredUser.save( function( err ) {
 
 								if ( err ) console.log( 'Error ' + err );
-								res.send({ redirect : '/login' });
+								res.json({ success : true });
 
 							});// newRegisteredUser.save
 
 						} else {
 
 							res.send( errors.join( '<br/> ' ) );
+
 						}
 
 					});
@@ -191,31 +192,37 @@ exports.login = function ( req, res ) {
 	res.render( 'login' );
 };
 
+
 // apt.post( '/login' ) //
 exports.verifyLogin = function ( req, res ) {
 
 	var oldUser		= req.body.username;
 	var oldPassword	= req.body.password;
 
+	console.log( oldUser );
+	console.log( oldPassword );
+
 	Users.findOne({ username : oldUser },
 		function ( err, user ) {
 
 			if ( err ) console.log( 'Error ' + err );
 
-			console.log( user );
+			console.log( "user = "+user );
 
 			if ( user !== null && oldUser === user.username ) {
 
-				if ( user.password !== null && oldPassword === user.password) {
+				if ( user.password !== null && oldPassword === user.password ) {
 
-					req.session.name = user;
-					req.send({ redirect : '/dashboard' });
+					req.session = user._id;
+					res.json({ success : true });
 					return;
 
 				} else {
 
 					res.send( 'Wrong Password' );
+					
 				}
+
 			} else {
 
 				res.send( 'Wrong User Name' );

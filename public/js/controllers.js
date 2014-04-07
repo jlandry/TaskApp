@@ -1,88 +1,104 @@
 'use strict';
 
-/**************************************
-            * Controllers
- *************************************/
+/***********************************************
+                  * Controllers
+ ***********************************************/
 
-// signUp.jade form validation, ajax call, & saves to mongodb //
+// Module //
 
-angular.module( 'myApp.controllers', [] ).
-  controller('SignUpCtrl', function ( $scope, $http ) {
-    
-    // Saves newUsers from signUp.jade to mongo( User ) //
-
-    $scope.saveUser = function ( newUser ) {
-
-      // Logs form information in JSON
-      console.log( newUser );
-
-      $http.post( '/signup', newUser ).
-        success( function ( data, status, headers, config ) {
-
-          angular.element( document.querySelector( '.sign-up-form' ) ).val( "" );
-
-        }).
-        error( function ( data, status, headers, config ) {
-
-          $scope.newUser = [{
-
-            user      : data,
-            email     : data,
-            password  : data,
-            numMeals  : data,
-            numHours  : data,
-            createdAt : Date.now()
-          
-          }];
-
-        });
-
-      };
-
-  }).
-  controller( 'LoginCtrl', function ( $scope, $http ) {
-
-    $scope.checkUser = function ( oldUser ) {
-
-      console.log( oldUser );
-
-      $http.post( '/login', oldUser ).
-        success( function ( data, status, headers, config ) {
-
-        }).
-        error( function ( data, status, headers, config) {
+var app = angular.module( 'myApp.controllers', [] );
 
 
-          $scope.oldUser = [{
+/*************************
+      * signUp.jade
+ *************************/
 
-            user      : data,
-            password  : data
+app.controller('SignUpCtrl', function ( $scope, $http, $location) {
+  
+  // Saves newUsers from signUp.jade to mongo( User ) //
 
-          }];
+  $scope.saveUser = function ( newUser ) {
 
-        });
+    // Logs form information in JSON
+    console.log( newUser );
 
-    }
+    $http.post( '/signup', newUser ).
+      success( function ( data, status, headers, config ) {
 
-  });
+        if ( data.success ) {
+
+          $location.path( '/login' );
+
+        }
+
+      }).
+      error( function ( data, status, headers, config ) {
+
+        $scope.newUser = [{
+
+          user      : data,
+          email     : data,
+          password  : data,
+          numMeals  : data,
+          numHours  : data,
+          createdAt : Date.now()
+        
+        }];
+
+      });
+
+    };
+
+});
 
 
+/*************************
+      * login.jade
+ *************************/
+
+app.controller( 'LoginCtrl', function ( $scope, $http ) {
+
+  // Holds data from login form 
+  $scope.checkUser = {};
+
+  $scope.checkUser = function ( oldUser ) {
+
+    $http({
+
+      method    : 'POST',
+      url       : '/login',
+      data      : $.param( $scope.checkUser ), // Pass data as stings
+      headers   : { 'Content-Type' : '/'}
+
+    }).
+    success( function ( data ) {
+
+      console.log( data );
+
+      if ( !data.success ) {
+
+        // if not successful, bind errors to error variables
+        //$scope.errorName = data.errors.name;
+
+      } else {
+
+        $location.path( '/dashboard' );
+
+      }
+    });
+  };
+
+});
+
+/*************************
+      * dashboard.jade
+ *************************/
 
 
+app.controller( 'DashboardCtrl', function ( $scope, $http ) {
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+});
 
 
 

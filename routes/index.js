@@ -1,3 +1,14 @@
+// Setting Sessions //
+var auth = null;
+
+
+exports.test = function ( req, res ) {
+	res.render( '/test' );
+};
+
+exports.testing = function ( req, res ) {
+	res.redirect( '/login' );
+};
 
 /****************************
 		* index.jade
@@ -25,11 +36,11 @@ exports.partials = function ( req, res ) {
 // apt.get( '/dashboard' )  //
 exports.dashboard = function ( req, res ) {
 
-	if ( req.session.name ) {
+	if ( req.session ) {
 
 		auth = true;
 
-		res.render( 'dashboard' );
+		res.json({ success : true });
 	
 	} else {
 
