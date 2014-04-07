@@ -3,24 +3,46 @@
 // Declare app level module which depends on filters, and services
 
 angular.module('myApp', [
+
   'myApp.controllers',
   'myApp.filters',
   'myApp.services',
   'myApp.directives'
+
 ]).
-config(function ($routeProvider, $locationProvider) {
-  // $routeProvider.
-    // when('/dashboard', {
-    //   templateUrl: 'partials/dashboard',
-    //   controller: 'DashboardCtrl'
-    // }).
-    // when('/view2', {
-    //   templateUrl: 'partials/partial2',
-    //   controller: 'MyCtrl2'
-    // }).
-    // otherwise({
-    //   redirectTo: '/view1'
-    // });
+config( function ( $routeProvider, $locationProvider ) {
+
+  $routeProvider.
+    when( '/', {
+
+      templateUrl : 'views/index.html',
+      controller  : 'MyAppCtrl'
+
+    }).
+    when( '/signUp', {
+
+      templateUrl : 'views/accounts/signUp.html',
+      controller  : 'SignUpCtrl'
+
+    }).
+    when( '/login', {
+
+      templateUrl : 'views/accounts/login.html',
+      controller  : 'LoginCtrl'
+
+    }).
+    when( '/dashboard', {
+
+      templateUrl : 'views/accounts/dashboard.html',
+      controller  : 'Dashboard.Ctrl'
+
+    }).
+    otherwise({
+
+      redirectTo  : '/'
+
+    });
 
   $locationProvider.html5Mode(true);
+
 });

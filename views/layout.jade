@@ -11,6 +11,7 @@ html(ng-app="myApp")
 
     body
         include head
+        .container-fluid( ng-view )
 
         block content
         script(src='js/lib/angular/angular.js')

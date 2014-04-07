@@ -8,6 +8,17 @@
 
 var app = angular.module( 'myApp.controllers', [] );
 
+/*************************
+      * index.html
+ *************************/
+
+app.controller( 'MyAppCtrl', function ( $scope, $http, $location ) {
+
+
+});
+
+
+
 
 /*************************
       * signUp.jade
@@ -56,7 +67,7 @@ app.controller('SignUpCtrl', function ( $scope, $http, $location) {
       * login.jade
  *************************/
 
-app.controller( 'LoginCtrl', function ( $scope, $http ) {
+app.controller( 'LoginCtrl', function ( $scope, $http, $location ) {
 
   // Holds data from login form 
   $scope.checkUser = {};
@@ -67,18 +78,15 @@ app.controller( 'LoginCtrl', function ( $scope, $http ) {
 
       method    : 'POST',
       url       : '/login',
-      data      : $.param( $scope.checkUser ), // Pass data as stings
-      headers   : { 'Content-Type' : '/'}
+      data      : oldUser
 
     }).
     success( function ( data ) {
 
-      console.log( data );
-
       if ( !data.success ) {
 
         // if not successful, bind errors to error variables
-        //$scope.errorName = data.errors.name;
+        $scope.errorName = data.errors.name;
 
       } else {
 

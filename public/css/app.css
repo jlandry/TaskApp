@@ -21,7 +21,6 @@ ul.top-right-navbar li {
   margin-right: 10px;
 }
 
-/* ###### login.jade ###### */
 /* line 20, ../../sass/app.scss */
 .login-form {
   width: 80%;
@@ -38,12 +37,6 @@ ul.top-right-navbar li {
 .sign-up-form {
   width: 80%;
   margin: auto;
-}
-
-/* line 33, ../../sass/app.scss */
-.sliderExample {
-  border: 1px solid #f0f0f0;
-  margin: 2em;
 }
 
 /* ###### login.jade ###### */

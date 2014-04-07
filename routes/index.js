@@ -2,14 +2,6 @@
 var auth = null;
 
 
-exports.test = function ( req, res ) {
-	res.render( '/test' );
-};
-
-exports.testing = function ( req, res ) {
-	res.redirect( '/login' );
-};
-
 /****************************
 		* index.jade
  *****************************/
@@ -22,10 +14,10 @@ exports.index = function ( req, res ){
 
 
 // Angular-seed partials //
-exports.partials = function ( req, res ) {
-  var name = req.params.name;
-  res.render('partials/' + name);
-};
+// exports.partials = function ( req, res ) {
+//   var name = req.params.name;
+//   res.render('partials/' + name);
+// };
 
 
 
@@ -44,7 +36,8 @@ exports.dashboard = function ( req, res ) {
 	
 	} else {
 
-		res.redirect( '/login' );
+		res.json( );
+
 	}
 
 };

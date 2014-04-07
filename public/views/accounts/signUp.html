@@ -1,0 +1,44 @@
+<div class="row col-md-6 col-md-offset-3">
+  <div class="sign-up-form">
+    <form name="signUpForm" ng-submit="saveUser( newUser )" role="form" novalidate="novalidate">
+      <div class="form-group">
+        <label for="signup-username">Username</label>
+        <input id="signup-username" ng-model="newUser.username" type="text" placeholder="Enter User Name" name="username" required="required" class="form-control"/>
+        <p ng-show="newUser.username.length &lt; 3" class="help-block">Username is too short</p>
+        <p ng-show="newUser.username.length &gt; 3 * 4" class="help-block">Username is too long</p>
+      </div>
+      <div class="form-group">
+        <label for="signup-email">Email address</label>
+        <input id="signup-email" ng-model="newUser.email" type="email" placeholder="Enter email" name="email" required="required" class="form-control"/>
+        <p ng-show="newUser.email.$invalid &amp;&amp; !newUser.email.$pristine" class="help-block">Enter a valid email</p>
+      </div>
+      <div class="form-group">
+        <label for="signup-password1">Password</label>
+        <input id="signup-password1" ng-model="newUser.password" type="password" placeholder="Password" name="password" ng-minlength="4" required="required" class="form-control"/>
+        <p ng-show="newUser.password.length &lt; 4" class="help-block">Password is too short</p>
+      </div>
+      <div class="form-group">
+        <label for="signup-password2">Confirm Password</label>
+        <input id="signup-password2" ng-model="newUser.password_conf" type="password" placeholder="Confirm Password" name="password_conf" required="required" class="form-control"/>
+        <p ng-show="newUser.password_conf.length &lt; 4" class="help-block">Password is too short</p>
+      </div>
+      <div class="form-group">
+        <labl for="signup-numMeals">Number of Meals Per Day</labl>
+        <input id="signup-numMeals" ng-model="newUser.numMeals" type="number" placeholder="# of meals" required="required" class="form-control"/>
+        <p ng-show="newUser.numMeals &lt; 1" class="help-block">You need to eat at least one meal today</p>
+        <p ng-show="newUser.numMeals &gt; 12" class="help-block">That's too many meals for one day</p>
+      </div>
+      <div class="form-group">
+        <labl for="signup-numHours">Number of Hours Between Meals</labl>
+        <input id="signup-numHours" ng-model="newUser.numHours" type="number" placeholder="# of hours between meals" required="required" class="form-control"/>
+        <p ng-show="newUser.numHours &lt; 1" class="help-block">You need to eat at least one meal today</p>
+        <p ng-show="newUser.numHours &gt; 12" class="help-block">That's too many meals for one day</p>
+      </div>
+      <div class="checkbox">
+        <input ng-model="agreement" type="checkbox" required="required"/><a href="/agreement">
+          <p>Agree to possibly eating a dick</p></a>
+      </div>
+      <button id="signup-btn" type="submit" ng-disabled="signUpForm.$invalid" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+</div>

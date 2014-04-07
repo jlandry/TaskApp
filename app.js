@@ -59,16 +59,16 @@ app.use( express.session( { secret : 'kingtak' } ));
  **************************/
 
 app.get( '/', routes.index );
-app.get( '/dashboard', routes.dashboard );
+// app.get( '/dashboard', routes.dashboard );
 
 
 /**************************
 		* users.js
  **************************/
 
-app.get( '/signUp', users.signUp );
-app.get( '/login', users.login );
-app.get( '/logout', users.logout );
+// app.get( '/signUp', users.signUp );
+// app.get( '/login', users.login );
+// app.get( '/logout', users.logout );
 
 app.post( '/signUp', users.newUser );
 app.post( '/login', users.verifyLogin );
@@ -77,7 +77,7 @@ app.post( '/login', users.verifyLogin );
 		* api.js
  **************************/
 
-app.get('/api/name', api.name);
+// app.get('/api/name', api.name);
 
 
 
