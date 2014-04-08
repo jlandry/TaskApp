@@ -1,12 +1,22 @@
+/**************************************
+			* JWT
+**************************************/
+
+var expressJwt	= require( 'express-jwt' );
+var jwt			= require( 'jsonwebtoken' );
 
 /**************************************
-			* mongoose
- *************************************/
+			* mongoose.js
+**************************************/
+
 
 var mongoose	= require('mongoose');
 
+
 // connects to MongoDB //
 mongoose.connect( 'mongodb://localhost/zombs');
+
+
 
 // User account information //
 var User = mongoose.Schema({
@@ -24,6 +34,7 @@ var User = mongoose.Schema({
 	}
 
 });
+
 
 // User meal input //
 var Meal = mongoose.Schema({
@@ -43,18 +54,14 @@ var Users	= mongoose.model( 'user', User );
 var Meals	= mongoose.model( 'meal', Meal );
 
 
-/* Checks Sessions */
-var auth = null;
-
-
-
-
 /**************************************
-			* signUp.jade
+			* signUp
  *************************************/
 
+
+
 // apt.get( '/signUp' ) //
-exports.signUp = function( req, res ) {
+exports.signUp = function ( req, res ) {
 	res.render( 'signUp' );
 };
 
@@ -127,7 +134,7 @@ exports.newUser = function ( req, res ) {
 				res.send( errors.join('<br/>') );
 			} else {
 				Users.findOne({ email : newUserEmail },
-					function( err, user ) {
+					function ( err, user ) {
 
 						if ( err ) console.log( 'Error ' + err );
 
@@ -148,6 +155,7 @@ exports.newUser = function ( req, res ) {
 								numMeals		: newUserNumMeals,
 								numHours		: newUserNumHours,
 								createdAt		: {
+									
 									type	: Date,
 									default	: Date.now()
 								
@@ -182,10 +190,10 @@ exports.newUser = function ( req, res ) {
 };//exports.newUser
 
 
-
 /********************************
-			* login.jade
+			* login
  ********************************/
+
 
 // apt.get( '/login' ) //
 exports.login = function ( req, res ) {
@@ -199,9 +207,6 @@ exports.verifyLogin = function ( req, res ) {
 	var oldUser		= req.body.username;
 	var oldPassword	= req.body.password;
 
-	console.log( oldUser );
-	console.log( oldPassword );
-
 	Users.findOne({ username : oldUser },
 		function ( err, user ) {
 
@@ -213,7 +218,6 @@ exports.verifyLogin = function ( req, res ) {
 
 				if ( user.password !== null && oldPassword === user.password ) {
 
-					req.session = user._id;
 					res.json({ success : true });
 					return;
 
@@ -234,14 +238,34 @@ exports.verifyLogin = function ( req, res ) {
 };// exports.verifyLogin
 
 
+/********************************
+			* dashboard
+ ********************************/
 
+
+//app.post( '/dashboard' )
+exports.userDashboard = function ( req, res ) {
+	
+	var uID = '53433e007182fcdd3f64469c';
+
+	Users.findOne({ _id : uID },
+		function ( err, user ) {
+
+			if ( err ) console.log( 'Error ' + err );
+
+			console.log( user );
+			console.log( user.id );
+
+	});
+};
 
 
 /********************************
 			* logout
  ********************************/
 
-// apt.get( '')
+
+// apt.get( '/')
 exports.logout = function ( req, res ) {
 	req.session.destroy();
 	res.redirect( '/login' );

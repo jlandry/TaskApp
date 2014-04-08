@@ -86,14 +86,17 @@ app.controller( 'LoginCtrl', function ( $scope, $http, $location ) {
       if ( !data.success ) {
 
         // if not successful, bind errors to error variables
-        $scope.errorName = data.errors.name;
+        // $scope.errorUserName      = data.errors.oldUser.username;
+        // $scope.errorUserPassword  = data.errors.oldUser.password;
 
       } else {
 
         $location.path( '/dashboard' );
 
       }
+
     });
+
   };
 
 });
@@ -104,11 +107,8 @@ app.controller( 'LoginCtrl', function ( $scope, $http, $location ) {
 
 
 app.controller( 'DashboardCtrl', function ( $scope, $http ) {
-
-
+  
 });
-
-
 
 
   

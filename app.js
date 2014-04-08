@@ -10,8 +10,12 @@ var express	= require( 'express' ),
 	http	= require( 'http' ),
 	path	= require( 'path' );
 
+
 var app			= module.exports = express();
 var mongoose	= require( 'mongoose' );
+
+var expressJwt	= require( 'express-jwt' );
+var jwt			= require( 'jsonwebtoken' );
 
 
 /****************************
@@ -27,6 +31,10 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(users, expressJwt({ secret : 'kingtak' }) );
+app.use(jwt);
 
 
 // development only
@@ -41,9 +49,9 @@ if (app.get('env') === 'production') {
 
 
 
-/****************************
+/**************************
 	* Sessions Handler
- *****************************/
+ **************************/
 app.use( express.cookieParser() );
 app.use( express.session( { secret : 'kingtak' } ));
 
@@ -51,12 +59,17 @@ app.use( express.session( { secret : 'kingtak' } ));
 
 /**************************************************
 					* Route Handler
- **************************************************/
+***************************************************/
 
 
 /**************************
 		* index.js
  **************************/
+
+
+// redirect all others to the index (HTML5 history)
+app.get('*', routes.index);
+
 
 app.get( '/', routes.index );
 // app.get( '/dashboard', routes.dashboard );
@@ -72,6 +85,7 @@ app.get( '/', routes.index );
 
 app.post( '/signUp', users.newUser );
 app.post( '/login', users.verifyLogin );
+app.post( '/dashboard', users.userDashboard );
 
 /**************************
 		* api.js
@@ -79,15 +93,6 @@ app.post( '/login', users.verifyLogin );
 
 // app.get('/api/name', api.name);
 
-
-
-
-
-
-
-
-// redirect all others to the index (HTML5 history)
-// app.get('*', routes.index);
 
 
 

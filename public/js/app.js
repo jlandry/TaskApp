@@ -34,7 +34,7 @@ config( function ( $routeProvider, $locationProvider ) {
     when( '/dashboard', {
 
       templateUrl : 'views/accounts/dashboard.html',
-      controller  : 'Dashboard.Ctrl'
+      controller  : 'DashboardCtrl'
 
     }).
     otherwise({
