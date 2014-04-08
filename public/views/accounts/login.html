@@ -4,11 +4,13 @@
       <div class="form-group">
         <label for="login-username">Username</label>
         <input id="login-username" ng-model="oldUser.username" type="text" placeholder="User Name" name="username" required="required" class="form-control"/>
+        <span class="help-block" ng-show="errorUsername">{{ errorUserName }}</span>
         <p ng-show="oldUser.username.length &lt; 3" class="help-block">Please Input Your Username</p>
       </div>
       <div class="form-group">
         <label for="login-password">Password</label>
         <input id="login-password" ng-model="oldUser.password" type="password" placeholder="Password" name="password" required="required" class="form-control"/>
+        <span class="help-block" ng-show="errorUserPassword">{{ errorUserPassword }}</span>
         <p ng-show="oldUser.password.length &lt; 5" class="help-block">Please Input Your Password</p>
         <div class="login-signup-btn"><a href="/signUp">
             <p>Sign Up?</p></a></div>
