@@ -14,13 +14,11 @@ var express	= require( 'express' ),
 var app			= module.exports = express();
 var mongoose	= require( 'mongoose' );
 
-var expressJwt	= require( 'express-jwt' );
-var jwt			= require( 'jsonwebtoken' );
-
 
 /****************************
 		* Configuration
  *****************************/
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -29,13 +27,10 @@ app.set('view engine', 'jade');
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(app.router);
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(users, expressJwt({ secret : 'kingtak' }) );
-app.use(jwt);
-
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(app.router);
 
 // development only
 if (app.get('env') === 'development') {
@@ -48,10 +43,11 @@ if (app.get('env') === 'production') {
 }
 
 
-
 /**************************
 	* Sessions Handler
  **************************/
+
+
 app.use( express.cookieParser() );
 app.use( express.session( { secret : 'kingtak' } ));
 

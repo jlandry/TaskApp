@@ -1,2 +1,19 @@
-<h1>dashboard</h1>
-<p>{{ test }}</p>
+<div class="row">
+  <div class="meal-form col-md-6 col-md-offset-3">
+    <form name="mealForm" ng-submit="mealInput( meal )" role="form" novalidate="novalidate">
+      <div class="form-group">
+        <label for="meal-input">What Did You Eat?</label>
+        <input id="meal-input" ng-model="meal.meal" type="text" placeholder="I just ate..." name="meal" required="required" class="form-control"/>
+        <span class="help-block" ng-show="errorMealMeal">{{ errorMealMeal }}</span>
+        <p ng-show="mealTime.length < 4" class="help-block">Please input a meal</p>
+        <p>Kingtak just ate a <b>{{ meal.meal }}</b>!</p>
+      </div>
+      <button id="login-btn" type="submit" ng-disabled="mealForm.$invalid" class="btn btn-default">Submit</button>
+    </form>
+    <ul>
+      <li ng-repeat="meal in meals">
+        <h3>{{ meal }}</h3>
+      </li>
+    </ul>
+  </div>
+</div>

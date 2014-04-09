@@ -1,0 +1,73 @@
+/**************************
+      * head.html
+ **************************/
+/* line 5, ../../sass/style.scss */
+.nav-bar.row {
+  width: 90%;
+}
+
+/* line 8, ../../sass/style.scss */
+.logo-navbar {
+  float: left;
+  margin-left: 50px;
+  display: inline;
+}
+
+/* line 13, ../../sass/style.scss */
+ul.top-right-navbar {
+  list-style: none;
+  float: right;
+}
+/* line 16, ../../sass/style.scss */
+ul.top-right-navbar li {
+  display: inline;
+  margin-right: 10px;
+}
+
+/**************************
+      * signUp.html
+ **************************/
+/* line 26, ../../sass/style.scss */
+.sign-up-form {
+  width: 80%;
+  margin: auto;
+}
+
+/**************************
+        * login.html
+ **************************/
+/* line 35, ../../sass/style.scss */
+.login-form {
+  width: 80%;
+  margin: auto;
+}
+
+/* line 39, ../../sass/style.scss */
+.login-signup-btn {
+  float: right;
+}
+
+/**************************
+      * dashboard.html
+ **************************/
+/* line 48, ../../sass/style.scss */
+.meal-form {
+  width: 80%;
+  margin: auto;
+}
+
+/*********************************************************
+                  *** MEDIA QUERIES ***
+*********************************************************/
+/**************************
+      * Large Desktop
+***************************/
+/**************************
+        * Tablet
+***************************/
+/**************************
+    * Landscape Mobile
+***************************/
+/**************************
+        * Mobile
+***************************/

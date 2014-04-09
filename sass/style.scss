@@ -1,0 +1,98 @@
+/**************************
+      * head.html
+ **************************/
+
+.nav-bar.row {
+  width: 90%;
+}
+.logo-navbar {
+  float: left;
+  margin-left: 50px;
+  display: inline;
+}
+ul.top-right-navbar {
+  list-style: none;
+  float: right;
+  li {
+    display: inline;
+    margin-right: 10px;
+  }
+}
+
+/**************************
+      * signUp.html
+ **************************/
+
+.sign-up-form {
+  width: 80%;
+  margin: auto;
+}
+
+/**************************
+        * login.html
+ **************************/
+
+.login-form {
+  width: 80%;
+  margin: auto;
+}
+.login-signup-btn {
+  float: right;
+}
+
+
+/**************************
+      * dashboard.html
+ **************************/
+
+.meal-form {
+  width: 80%;
+  margin: auto;
+}
+
+
+
+
+
+
+/*********************************************************
+                  *** MEDIA QUERIES ***
+*********************************************************/
+
+/**************************
+      * Large Desktop
+***************************/
+
+
+@media (min-width: 1200px) {
+
+}// large screens 
+
+
+
+
+/**************************
+        * Tablet
+***************************/
+
+@media (min-width: 768px) and (max-width: 979px) {
+
+}// medium screens
+
+
+/**************************
+    * Landscape Mobile
+***************************/
+
+@media (max-width: 767px) {
+
+}// smedium
+
+
+/**************************
+        * Mobile
+***************************/
+
+@media (max-width: 480px) {
+
+}// max-width 640px, small screens

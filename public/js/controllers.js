@@ -106,9 +106,25 @@ app.controller( 'LoginCtrl', function ( $scope, $http, $location ) {
  *************************/
 
 
-app.controller( 'DashboardCtrl', function ( $scope, $http ) {
-  
+app.controller('DashboardCtrl', function ( $scope, $http ) {
+
+  $scope.mealInput = function ( meal ) {
+
+    $http({
+
+    method  : 'POST',
+    url     : '/dashboard',
+    data    : meal
+
+  }).
+    success( function ( data ) {
+
+
+    }).
+    error( function () {
+
+    });
+    
+  };
+
 });
-
-
-  

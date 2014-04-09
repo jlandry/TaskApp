@@ -1,9 +1,9 @@
 /**************************************
-			* JWT
+			* Set Sessions
 **************************************/
 
-var expressJwt	= require( 'express-jwt' );
-var jwt			= require( 'jsonwebtoken' );
+var express = require('express');
+var auth = null;
 
 /**************************************
 			* mongoose.js
@@ -212,12 +212,13 @@ exports.verifyLogin = function ( req, res ) {
 
 			if ( err ) console.log( 'Error ' + err );
 
-			console.log( "user = "+user );
+			//console.log( "user = "+user );
 
 			if ( user !== null && oldUser === user.username ) {
 
 				if ( user.password !== null && oldPassword === user.password ) {
 
+					req.session = oldUser;
 					res.json({ success : true });
 					return;
 
@@ -242,21 +243,33 @@ exports.verifyLogin = function ( req, res ) {
 			* dashboard
  ********************************/
 
-
-//app.post( '/dashboard' )
+// app.post( '/dashboard' ) //
 exports.userDashboard = function ( req, res ) {
+
+	var justAte = req.body.meal;
+
+	console.log(justAte);
 	
-	var uID = '53433e007182fcdd3f64469c';
+	var newFood = new Meals({
 
-	Users.findOne({ _id : uID },
-		function ( err, user ) {
+		food	: justAte,
+		date	: {
 
-			if ( err ) console.log( 'Error ' + err );
+			type	: Date,
+			defualt	: Date.now()
 
-			console.log( user );
-			console.log( user.id );
+		}
 
 	});
+
+	newFood.save( function( err ) {
+
+		if ( err ) res.send( 'Error ' + err );
+
+		res.json({ success : true });
+
+	});
+
 };
 
 
