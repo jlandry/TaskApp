@@ -63,10 +63,28 @@ var Meals	= mongoose.model( 'meal', Meal );
 
 
 // apt.get( '/' ) //
-exports.index = function ( req, res ){
-  res.render('index');
+exports.index = function ( req, res ) {
+	res.render( 'index' );
 };
 
+
+//app.get( '/api/home') //
+exports.home = function ( req, res ) {
+
+	Meals.find().sort({ eaten_On : -1 }).
+
+		exec( function ( err, meals ) {
+
+			if ( err ) console.log( 'Error ' + err );
+
+			console.log("inside index get, meals below:");
+			console.log(meals);
+
+			res.json( meals );
+
+	});
+
+};
 
 
 /**************************************

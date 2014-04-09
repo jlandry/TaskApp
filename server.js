@@ -70,12 +70,7 @@ if (app.get('env') === 'production') {
 
 // app.get( '/', routes.index );
 // app.get( '/dashboard', routes.dashboard );
-
-
-/**************************
-		* users.js
- **************************/
-
+app.get( '/api/home', routes.home );
 app.get( '/api/meals', routes.userMeals );
 
 app.post( '/api/signUp', routes.newUser );

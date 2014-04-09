@@ -14,10 +14,13 @@ var app = angular.module( 'myApp.controllers', [] );
 
 app.controller( 'MyAppCtrl', function ( $scope, $http, $location ) {
 
-  $http.get( '/' ).
+  $http.get( '/api/home' ).
 
     success( function ( data, status, headers, config ) {
 
+      console.log('inside index controllers.js, data below:')
+      console.log( data );
+      console.log( data );
       $scope.posts = data;
 
 
@@ -25,6 +28,7 @@ app.controller( 'MyAppCtrl', function ( $scope, $http, $location ) {
     error( function ( data, status, headers, config ) {
 
       console.log( 'Error ' + response.status );
+
     });
 
 });
@@ -159,7 +163,7 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
   
     }).
     success( function ( data, status, headers, config ) {
-      
+
       $scope.meals.splice(0, data.length);
       $scope.userWho = data[0];
 
