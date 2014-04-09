@@ -280,7 +280,7 @@ exports.userDashboard = function ( req, res ) {
 
 		auth = true;
 		var justAte = req.body.meal;
-		console.log("below is the user ._id");
+		
 		console.log(req.session.user._id);
 
 		var newFood = new Meals({

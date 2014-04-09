@@ -122,7 +122,8 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
 
   }).
     success( function ( data ) {
-
+      console.log("Inside success, data is below:")
+      console.log(data);
       mealList();
 
     }).
@@ -142,11 +143,16 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
     }).
     success( function ( data, status, headers, config ) {
 
+      console.log("Inside meallList.success, data is below:");
+      console.log(data);
+
+      $scope.meals.splice(0, data.length);
+      
       for (var i = 0; i < data.length; i++) {
 
-        data.push( data[i] );
+        $scope.meals.push( data[i] );
 
-      };
+      }
 
     }).
     error( function ( data, status, headers, config ) {

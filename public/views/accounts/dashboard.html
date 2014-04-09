@@ -6,7 +6,7 @@
         <input id="meal-input" ng-model="meal.meal" type="text" placeholder="I just ate..." name="meal" required="required" class="form-control"/>
         <span class="help-block" ng-show="errorMealMeal">{{ errorMealMeal }}</span>
         <p ng-show="mealTime.length < 4" class="help-block">Please input a meal</p>
-        <p>Kingtak just ate a <b>{{ meal.meal }}</b>!</p>
+        <p><b>{{ userWho }}</b> just ate a <b>{{ meal.meal }}</b>!</p>
       </div>
       <button id="login-btn" type="submit" ng-disabled="mealForm.$invalid" class="btn btn-default">Submit</button>
     </form>
