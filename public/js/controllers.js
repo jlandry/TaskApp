@@ -144,10 +144,10 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
     success( function ( data, status, headers, config ) {
 
       console.log("Inside meallList.success, data is below:");
-      console.log(data);
+      console.log(data.food);
 
       $scope.meals.splice(0, data.length);
-      
+
       for (var i = 0; i < data.length; i++) {
 
         $scope.meals.push( data[i] );

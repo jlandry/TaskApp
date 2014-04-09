@@ -251,16 +251,13 @@ exports.verifyLogin = function ( req, res ) {
  exports.userMeals = function ( req, res ) {
 
 	if ( req.session.user ) {
-		console.log("req.session.user.id.tostring() is below!");
-		console.log(req.session.user._id.toString());
+
 		auth = true;
 
 		Meals.find({ user_Id : req.session.user._id.toString() }).sort({ eaten_On : -1 }).
 			exec( function ( err, meals) {
 
 				if ( err ) console.log( 'Error ' + err );
-				console.log("meals is below!");
-				console.log(meals);
 				res.json( meals );
 
 		});
@@ -280,7 +277,7 @@ exports.userDashboard = function ( req, res ) {
 
 		auth = true;
 		var justAte = req.body.meal;
-		
+
 		console.log(req.session.user._id);
 
 		var newFood = new Meals({

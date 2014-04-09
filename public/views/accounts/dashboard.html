@@ -12,7 +12,7 @@
     </form>
     <ul>
       <li ng-repeat="meal in meals">
-        <h3>{{ meal }}</h3>
+        <span><h3>{{ meal.food }}</h3><h4> @ {{ meal.eaten_On | date : "shortTime"}} on {{ meal.eaten_On | date : "mediumDate" }}</h4></span>
       </li>
     </ul>
   </div>
