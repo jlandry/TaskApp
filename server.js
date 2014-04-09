@@ -30,6 +30,20 @@ app.use(express.methodOverride());
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+
+/**************************
+	* Sessions Handler
+ **************************/
+
+
+app.use( express.cookieParser() );
+app.use( express.session( { secret : 'kingtak' } ));
+
+
+
 app.use(app.router);
 
 // development only
@@ -43,13 +57,6 @@ if (app.get('env') === 'production') {
 }
 
 
-/**************************
-	* Sessions Handler
- **************************/
-
-
-app.use( express.cookieParser() );
-app.use( express.session( { secret : 'kingtak' } ));
 
 
 
@@ -62,11 +69,6 @@ app.use( express.session( { secret : 'kingtak' } ));
 		* index.js
  **************************/
 
-
-// redirect all others to the index (HTML5 history)
-app.get('*', routes.index);
-
-
 app.get( '/', routes.index );
 // app.get( '/dashboard', routes.dashboard );
 
@@ -78,8 +80,9 @@ app.get( '/', routes.index );
 // app.get( '/signUp', users.signUp );
 // app.get( '/login', users.login );
 // app.get( '/logout', users.logout );
+app.get( '/api/meals', users.userMeals );
 
-app.post( '/signUp', users.newUser );
+app.post( '/api/signUp', users.newUser );
 app.post( '/login', users.verifyLogin );
 app.post( '/dashboard', users.userDashboard );
 
@@ -90,7 +93,8 @@ app.post( '/dashboard', users.userDashboard );
 // app.get('/api/name', api.name);
 
 
-
+// redirect all others to the index (HTML5 history)
+app.get('*', routes.index);
 
 /****************************
 	* Start Server

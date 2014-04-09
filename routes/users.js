@@ -3,7 +3,7 @@
 **************************************/
 
 var express = require('express');
-var auth = null;
+// var auth = null;
 
 /**************************************
 			* mongoose.js
@@ -29,7 +29,7 @@ var User = mongoose.Schema({
 	createdAt		: {
 
 		type	: Date,
-		default	: Date.now
+		default	: Date.now()
 
 	}
 
@@ -38,11 +38,13 @@ var User = mongoose.Schema({
 
 // User meal input //
 var Meal = mongoose.Schema({
-	food	: String,
-	date	: {
+
+	user_Id		: String,
+	food		: String,
+	eaten_On	: {
 
 		type	: Date,
-		default	: Date.now
+		default	: Date.now()
 
 	}
 
@@ -158,7 +160,7 @@ exports.newUser = function ( req, res ) {
 									
 									type	: Date,
 									default	: Date.now()
-								
+
 								}
 
 							});// newUser
@@ -218,18 +220,20 @@ exports.verifyLogin = function ( req, res ) {
 
 				if ( user.password !== null && oldPassword === user.password ) {
 
-					req.session = oldUser;
+					req.session.user = user;
 					res.json({ success : true });
 					return;
 
 				} else {
 
+					console.log( 'Wrong Password' );
 					res.send( 'Wrong Password' );
 					
 				}
 
 			} else {
 
+				console.log( 'Wrong User Name' );
 				res.send( 'Wrong User Name' );
 
 			}
@@ -243,32 +247,64 @@ exports.verifyLogin = function ( req, res ) {
 			* dashboard
  ********************************/
 
+ // app.get( '/dashboard') //
+ exports.userMeals = function ( req, res ) {
+
+	if ( req.session.user ) {
+		console.log("req.session.user.id.tostring() is below!");
+		console.log(req.session.user._id.toString());
+		auth = true;
+
+		Meals.find({ user_Id : req.session.user._id.toString() }).sort({ eaten_On : -1 }).
+			exec( function ( err, meals) {
+
+				if ( err ) console.log( 'Error ' + err );
+				console.log("meals is below!");
+				console.log(meals);
+				res.json( meals );
+
+		});
+
+	}
+
+ };
+
+
 // app.post( '/dashboard' ) //
 exports.userDashboard = function ( req, res ) {
-
-	var justAte = req.body.meal;
-
-	console.log(justAte);
 	
-	var newFood = new Meals({
+	console.log("inside user.dashboard = req.session.user/user is =");
+	console.log( req.session.user );
 
-		food	: justAte,
-		date	: {
+	if ( req.session.user ) {
 
-			type	: Date,
-			defualt	: Date.now()
+		auth = true;
+		var justAte = req.body.meal;
+		console.log("below is the user ._id");
+		console.log(req.session.user._id);
 
-		}
+		var newFood = new Meals({
 
-	});
+			user_Id		: req.session.user._id,
+			food		: justAte,
+			eaten_On	: {
 
-	newFood.save( function( err ) {
+				type	: Date,
+				defualt	: Date.now()
 
-		if ( err ) res.send( 'Error ' + err );
+			}
 
-		res.json({ success : true });
+		});
 
-	});
+		newFood.save( function( err ) {
+
+			if ( err ) res.send( 'Error ' + err );
+
+			res.json({ success : true });
+
+		});
+
+	}
 
 };
 

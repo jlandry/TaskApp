@@ -107,6 +107,10 @@ app.controller( 'LoginCtrl', function ( $scope, $http, $location ) {
 
 
 app.controller('DashboardCtrl', function ( $scope, $http ) {
+  
+  $scope.meals = [];
+
+  mealList();
 
   $scope.mealInput = function ( meal ) {
 
@@ -119,12 +123,38 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
   }).
     success( function ( data ) {
 
+      mealList();
 
     }).
     error( function () {
 
     });
-    
+
   };
+
+  function mealList( ) {
+
+    $http({
+
+    method  : 'GET',
+    url     : '/api/meals'
+  
+    }).
+    success( function ( data, status, headers, config ) {
+
+      for (var i = 0; i < data.length; i++) {
+
+        data.push( data[i] );
+
+      };
+
+    }).
+    error( function ( data, status, headers, config ) {
+
+      console.log( "Errors with " + data );
+      
+    });
+
+  }
 
 });
