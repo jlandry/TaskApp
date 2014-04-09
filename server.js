@@ -5,7 +5,6 @@
 
 var express	= require( 'express' ),
 	routes	= require( './routes/index' ),
-	users	= require( './routes/users' ),
 	api		= require( './routes/api' ),
 	http	= require( 'http' ),
 	path	= require( 'path' );
@@ -69,7 +68,7 @@ if (app.get('env') === 'production') {
 		* index.js
  **************************/
 
-app.get( '/', routes.index );
+// app.get( '/', routes.index );
 // app.get( '/dashboard', routes.dashboard );
 
 
@@ -77,14 +76,11 @@ app.get( '/', routes.index );
 		* users.js
  **************************/
 
-// app.get( '/signUp', users.signUp );
-// app.get( '/login', users.login );
-// app.get( '/logout', users.logout );
-app.get( '/api/meals', users.userMeals );
+app.get( '/api/meals', routes.userMeals );
 
-app.post( '/api/signUp', users.newUser );
-app.post( '/login', users.verifyLogin );
-app.post( '/dashboard', users.userDashboard );
+app.post( '/api/signUp', routes.newUser );
+app.post( '/login', routes.verifyLogin );
+app.post( '/dashboard', routes.userDashboard );
 
 /**************************
 		* api.js

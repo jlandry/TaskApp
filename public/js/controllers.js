@@ -14,6 +14,18 @@ var app = angular.module( 'myApp.controllers', [] );
 
 app.controller( 'MyAppCtrl', function ( $scope, $http, $location ) {
 
+  $http.get( '/' ).
+
+    success( function ( data, status, headers, config ) {
+
+      $scope.posts = data;
+
+
+    }).
+    error( function ( data, status, headers, config ) {
+
+      console.log( 'Error ' + response.status );
+    });
 
 });
 
@@ -105,11 +117,11 @@ app.controller( 'LoginCtrl', function ( $scope, $http, $location ) {
       * dashboard.jade
  *************************/
 
-
 app.controller('DashboardCtrl', function ( $scope, $http ) {
   
-  $scope.meals = [];
-
+  $scope.meals   = [];
+  $scope.userWho = null;
+  
   mealList();
 
   $scope.mealInput = function ( meal ) {
@@ -122,12 +134,17 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
 
   }).
     success( function ( data ) {
-      console.log("Inside success, data is below:")
-      console.log(data);
-      mealList();
+
+      if( data.success ) {
+
+        mealList();
+
+      }
 
     }).
-    error( function () {
+    error( function ( data, status, headers, config ) {
+
+      console.log( 'Error ' + status, headers );
 
     });
 
@@ -142,11 +159,9 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
   
     }).
     success( function ( data, status, headers, config ) {
-
-      console.log("Inside meallList.success, data is below:");
-      console.log(data.food);
-
+      
       $scope.meals.splice(0, data.length);
+      $scope.userWho = data[0];
 
       for (var i = 0; i < data.length; i++) {
 
@@ -157,7 +172,7 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
     }).
     error( function ( data, status, headers, config ) {
 
-      console.log( "Errors with " + data );
+      console.log( "Errors with " + data.status );
       
     });
 
