@@ -74,7 +74,7 @@ app.get( '/api/home', routes.home );
 app.get( '/api/meals', routes.userMeals );
 app.get( '/api/time', routes.userTime );
 
-app.post( '/api/signUp', routes.newUser );
+app.post( '/signUp', routes.newUser );
 app.post( '/login', routes.verifyLogin );
 app.post( '/dashboard', routes.userDashboard );
 

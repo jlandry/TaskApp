@@ -194,14 +194,20 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
     }).
     success( function ( data, status, headers, config ) {
       
-      var totalMeals     = data.numMeals;
+      console.log('inside timer(), data.user below:');
+      console.log(data.user);
+
+      console.log('inside timer(), data.food below:');
+      console.log(data.food);
+
+      var totalMeals     = data.user.numMeals;
       var mealsEaten     = 0;
       var time2Eat       = Date.now() + 3600000;
-      var interval       = Date.now() + ( 360 * data.numHours );
+      var interval       = Date.now() + ( 360 * data.user.numHours );
       var timeLeft       = null;
       var timer          = angular.element( "#timer" );
 
-
+        // Timer till next meal //
         setInterval( function() {
 
           var days,
@@ -228,8 +234,9 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
           minutes     = parseInt( secondsLeft / 60 );
           seconds     = parseInt( secondsLeft % 60 );
     
-          timer.html("Hours "+ hours + " | Minutes " + minutes + " | Seconds " + seconds);
+          timer.html("Next Meal In : Hours "+ hours + " | Minutes " + minutes + " | Seconds " + seconds);
 
+          // Meal time timer //
           if ( secondsLeft < 0 ) {
 
             var lunch     = Date.now();
@@ -244,7 +251,7 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
             minutes2      = parseInt( secondsOn / 60 );
             seconds2      = parseInt( secondsOn % 60 );
 
-            timer.html( "Minutes " + minutes2 + " | Seconds " + seconds2 );
+            timer.html( "Time to Eat : Minutes " + minutes2 + " | Seconds " + seconds2 );
 
           }
 

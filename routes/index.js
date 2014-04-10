@@ -316,10 +316,24 @@ exports.logout = function ( req, res ) {
 // app.get( '/api/time' ) 
 exports.userTime = function ( req, res ) {
 
+	var startDay	= new Date();
+		startDay.setHours( 0,0,0,0 );
+	var endDay		= new Date();
+		endDay.setHours( 23,59,59,999 );
+
 	if ( req.session.user ) {
 
 		auth = true;
-		res.send( req.session.user );
+		Meals.find({ user_Id : req.session.user._id }).where("eaten_On").gt( startDay ).lt( endDay ).
+			exec( function ( err, food ) {
+
+				if ( err ) console.log( 'Error ' + err );
+
+				console.log("Meals is below:");
+				console.log(food);
+				res.json({ food: food, user : req.session.user });
+
+		});
 
 	}
 
