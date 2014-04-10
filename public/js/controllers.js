@@ -194,39 +194,61 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
     }).
     success( function ( data, status, headers, config ) {
       
-      var mealsLeft     = data.numMeals;
-      var interval      = Date.now()+(3600000 * data.numHours);
-      var eatenMeals    = null;
-      var timeLeft      = null;
-      var time          = null;
-      var timer         = angular.element( "#timer" );
+      var totalMeals     = data.numMeals;
+      var mealsEaten     = 0;
+      var time2Eat       = Date.now() + 3600000;
+      var interval       = Date.now() + ( 360 * data.numHours );
+      var timeLeft       = null;
+      var timer          = angular.element( "#timer" );
+
 
         setInterval( function() {
 
           var days,
               hours,
               minutes,
-              seconds;
+              seconds,
+              days2,
+              hours2,
+              minutes2,
+              seconds2;
 
           var currentTime = Date.now();
           var secondsLeft = ( interval - currentTime ) / 1000;
 
           // 86400 seconds in one day
-          days = parseInt( secondsLeft / 86400 );
+          days        = parseInt( secondsLeft / 86400 );
           secondsLeft = secondsLeft % 86400;
 
           // 3600 seconds in a hour
-          hours = parseInt( secondsLeft / 3600 );
+          hours       = parseInt( secondsLeft / 3600 );
           secondsLeft = secondsLeft % 3600;
 
           // 60 seconds in a minute
-          minutes = parseInt( secondsLeft / 60 );
-          seconds = parseInt( secondsLeft % 60 );
+          minutes     = parseInt( secondsLeft / 60 );
+          seconds     = parseInt( secondsLeft % 60 );
     
           timer.html("Hours "+ hours + " | Minutes " + minutes + " | Seconds " + seconds);
 
-        }, 1000);
+          if ( secondsLeft < 0 ) {
 
+            var lunch     = Date.now();
+            var secondsOn = ( time2Eat - lunch ) / 1000;
+
+            days2         = parseInt( secondsOn / 86400 );
+            secondsOn     = secondsOn % 86400;
+
+            hours2        = parseInt( secondsOn / 3600 );
+            secondsOn     = secondsOn % 3600;
+
+            minutes2      = parseInt( secondsOn / 60 );
+            seconds2      = parseInt( secondsOn % 60 );
+
+            timer.html( "Minutes " + minutes2 + " | Seconds " + seconds2 );
+
+          }
+
+        }, 1000);
 
     }).
     error( function ( data, status, headers, config ) {
