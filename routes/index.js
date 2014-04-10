@@ -26,10 +26,11 @@ var User = mongoose.Schema({
 	password		: String,
 	numMeals		: Number,
 	numHours		: Number,
+
 	createdAt		: {
 
 		type	: Date,
-		default	: Date.now()
+		default	: Date.now
 
 	}
 
@@ -45,7 +46,7 @@ var Meal = mongoose.Schema({
 	eaten_On	: {
 
 		type	: Date,
-		default	: Date.now()
+		default	: Date.now 
 
 	}
 
@@ -76,9 +77,6 @@ exports.home = function ( req, res ) {
 		exec( function ( err, meals ) {
 
 			if ( err ) console.log( 'Error ' + err );
-
-			console.log("inside index get, meals below:");
-			console.log(meals);
 
 			res.json( meals );
 
@@ -295,19 +293,19 @@ exports.logout = function ( req, res ) {
 			* dashboard
  ********************************/
 
- // app.get( '/dashboard') //
+ // app.get( '/api/meals') //
  exports.userMeals = function ( req, res ) {
 
 	if ( req.session.user ) {
 
+		user = req.session.user;
 		auth = true;
 
 		Meals.find({ user_Id : req.session.user._id.toString() }).sort({ eaten_On : -1 }).
-			exec( function ( err, meals) {
+			exec( function ( err, meals ) {
 
 				if ( err ) console.log( 'Error ' + err );
 				res.json( meals );
-
 		});
 
 	}
@@ -315,18 +313,26 @@ exports.logout = function ( req, res ) {
  };
 
 
+// app.get( '/api/time' ) 
+exports.userTime = function ( req, res ) {
+
+	if ( req.session.user ) {
+
+		auth = true;
+		res.send( req.session.user );
+
+	}
+
+};
+
+
 // app.post( '/dashboard' ) //
 exports.userDashboard = function ( req, res ) {
-
-	console.log("inside user.dashboard = req.session.user/user is =");
-	console.log( req.session.user );
 
 	if ( req.session.user ) {
 
 		auth = true;
 		var justAte = req.body.meal;
-
-		console.log(req.session.user._id);
 
 		var newFood = new Meals({
 
@@ -353,11 +359,6 @@ exports.userDashboard = function ( req, res ) {
 	}
 
 };
-
-
-
-
-
 
 
 

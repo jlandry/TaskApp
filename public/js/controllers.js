@@ -18,16 +18,13 @@ app.controller( 'MyAppCtrl', function ( $scope, $http, $location ) {
 
     success( function ( data, status, headers, config ) {
 
-      console.log('inside index controllers.js, data below:')
-      console.log( data );
-      console.log( data );
       $scope.posts = data;
 
 
     }).
     error( function ( data, status, headers, config ) {
 
-      console.log( 'Error ' + response.status );
+      console.log( 'Error ' + status );
 
     });
 
@@ -122,11 +119,13 @@ app.controller( 'LoginCtrl', function ( $scope, $http, $location ) {
  *************************/
 
 app.controller('DashboardCtrl', function ( $scope, $http ) {
-  
+
   $scope.meals   = [];
   $scope.userWho = null;
+  $scope.countDown = 0;
   
   mealList();
+  timer();
 
   $scope.mealInput = function ( meal ) {
 
@@ -148,13 +147,14 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
     }).
     error( function ( data, status, headers, config ) {
 
-      console.log( 'Error ' + status, headers );
+      console.log( 'Error ' + status );
 
     });
 
   };
 
-  function mealList( ) {
+  // retrieves user meal history //
+  function mealList() {
 
     $http({
 
@@ -164,7 +164,7 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
     }).
     success( function ( data, status, headers, config ) {
 
-      $scope.meals.splice(0, data.length);
+      $scope.meals.splice( 0, data.length );
       $scope.userWho = data[0];
 
       for (var i = 0; i < data.length; i++) {
@@ -176,10 +176,64 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
     }).
     error( function ( data, status, headers, config ) {
 
-      console.log( "Errors with " + data.status );
+      console.log( "Errors with " + status );
       
     });
 
   }
+
+
+  // countdown clock till next meal //
+  function timer() {
+
+    $http({
+
+      method  : 'GET',
+      url     : '/api/time'
+
+    }).
+    success( function ( data, status, headers, config ) {
+      
+      var mealsLeft     = data.numMeals;
+      var interval      = Date.now() + ( data.numHours * 60 * 60)  * 1000;
+      var currentTime   = Date.now();
+      var eatenMeals    = null;
+      var timeLeft      = null;
+      var time          = null;
+      
+
+        setInterval( function() {
+
+          var days,
+            hours,
+            minutes,
+            seconds;
+          console.log("inside setInterval");
+          var targetDate = new Date("Apr 9, 2014");
+          var currentDate = new Date().getTime();
+          var secondsLeft = ( targetDate - currentDate ) / 1000;
+
+          days = parseInt( secondsLeft / 86400 );
+          secondsLeft = secondsLeft % 86400;
+          // 3600 seconds in a hour
+          hours = parseInt( secondsLeft / 3600 );
+          secondsLeft = secondsLeft % 3600;
+          // 60 seconds in a minute
+          minutes = parseInt( secondsLeft / 60 );
+          seconds = parseInt( secondsLeft % 60 );
+          time = "Hours "+ hours + " | Minutes " + minutes + " | Seconds " + seconds;
+          $scope.countDown = seconds;
+
+        }, 1000);
+
+
+    }).
+    error( function ( data, status, headers, config ) {
+
+      console.log( 'Error ' + status );
+
+    });
+
+  }// timer
 
 });

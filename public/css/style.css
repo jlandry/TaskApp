@@ -25,9 +25,12 @@ ul.top-right-navbar li {
 }
 
 /**************************
+      * index.html
+ **************************/
+/**************************
       * signUp.html
  **************************/
-/* line 26, ../../sass/style.scss */
+/* line 30, ../../sass/style.scss */
 .sign-up-form {
   width: 80%;
   margin: auto;
@@ -36,13 +39,13 @@ ul.top-right-navbar li {
 /**************************
         * login.html
  **************************/
-/* line 35, ../../sass/style.scss */
+/* line 39, ../../sass/style.scss */
 .login-form {
   width: 80%;
   margin: auto;
 }
 
-/* line 39, ../../sass/style.scss */
+/* line 43, ../../sass/style.scss */
 .login-signup-btn {
   float: right;
 }
@@ -50,7 +53,7 @@ ul.top-right-navbar li {
 /**************************
       * dashboard.html
  **************************/
-/* line 48, ../../sass/style.scss */
+/* line 52, ../../sass/style.scss */
 .meal-form {
   width: 80%;
   margin: auto;
