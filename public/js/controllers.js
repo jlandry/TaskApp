@@ -195,34 +195,35 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
     success( function ( data, status, headers, config ) {
       
       var mealsLeft     = data.numMeals;
-      var interval      = Date.now() + ( data.numHours * 60 * 60)  * 1000;
-      var currentTime   = Date.now();
+      var interval      = Date.now()+(3600000 * data.numHours);
       var eatenMeals    = null;
       var timeLeft      = null;
       var time          = null;
-      
+      var timer         = angular.element( "#timer" );
 
         setInterval( function() {
 
           var days,
-            hours,
-            minutes,
-            seconds;
-          console.log("inside setInterval");
-          var targetDate = new Date("Apr 9, 2014");
-          var currentDate = new Date().getTime();
-          var secondsLeft = ( targetDate - currentDate ) / 1000;
+              hours,
+              minutes,
+              seconds;
 
+          var currentTime = Date.now();
+          var secondsLeft = ( interval - currentTime ) / 1000;
+
+          // 86400 seconds in one day
           days = parseInt( secondsLeft / 86400 );
           secondsLeft = secondsLeft % 86400;
+
           // 3600 seconds in a hour
           hours = parseInt( secondsLeft / 3600 );
           secondsLeft = secondsLeft % 3600;
+
           // 60 seconds in a minute
           minutes = parseInt( secondsLeft / 60 );
           seconds = parseInt( secondsLeft % 60 );
-          time = "Hours "+ hours + " | Minutes " + minutes + " | Seconds " + seconds;
-          $scope.countDown = seconds;
+    
+          timer.html("Hours "+ hours + " | Minutes " + minutes + " | Seconds " + seconds);
 
         }, 1000);
 
