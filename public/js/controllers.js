@@ -18,7 +18,21 @@ app.controller( 'MyAppCtrl', function ( $scope, $http, $location ) {
 
     success( function ( data, status, headers, config ) {
 
-      $scope.posts = data;
+      var users = data.users; 
+
+      for (var i = 0; i < data.meals.length; i++) {
+
+        var user_id   = data.meals[i].user_Id;
+        var user      = getUserById( users, user_id );
+        var lastMeal  = data.meals[i].eaten_On;
+
+        // Add new property/values to objects /
+        data.meals[i].timeToNextMeal = getTimeToNextMealFor( user, lastMeal )
+
+      }
+
+      $scope.users = data.meals;
+      $scope.posts = data.meals;
 
     }).
     error( function ( data, status, headers, config ) {
@@ -29,7 +43,39 @@ app.controller( 'MyAppCtrl', function ( $scope, $http, $location ) {
 
 });
 
+/**********
+  HELPERS
+***********/
 
+// matches users collection to meals collection //
+function getUserById (users, user_id) {
+
+  // returns user by user_id in users list //
+  for ( var i = 0; i < users.length; i++ ) {
+
+    if( users[i]._id == user_id ){
+      // returns a User model
+      return users[i];
+
+    }
+
+  }
+
+  return {}; // if its not found
+
+}
+
+
+// countdown timer for index page //
+function getTimeToNextMealFor ( user, meal ) {
+
+
+  var lastMeal  = new Date( meal ).getTime();
+  var timeTill  = lastMeal + ( 3600000 * user.numHours );
+
+  return timeTill;
+
+}
 
 
 /*************************
@@ -78,6 +124,7 @@ app.controller('SignUpCtrl', function ( $scope, $http, $location) {
 /*************************
       * login.jade
  *************************/
+
 
 app.controller( 'LoginCtrl', function ( $scope, $http, $location ) {
 
@@ -185,8 +232,8 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
   // countdown clock till next meal //
   function timer() {
 
-    $scope.myValue = true;
-    
+    var secondsLeft = null;
+
     $http({
 
       method  : 'GET',
@@ -195,20 +242,16 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
     }).
     success( function ( data, status, headers, config ) {
       
-      console.log('inside timer(), data.user below:');
-      console.log(data.user);
-
-      console.log('inside timer(), data.food below:');
       var it = data.food[0].eaten_On;
           it = new Date(it).getTime();
-      console.log( it );
 
       var totalMeals     = data.user.numMeals;
       var mealsEaten     = 0;
-      var time2Eat       = Date.now() + 3600000;
-      var interval       = it + ( 3600000 * data.user.numHours );
+      var time2Eat       = Date.now() + 3600;
+      var interval       = it + ( 3600 * data.user.numHours );
       var timeLeft       = null;
       var timer          = angular.element( "#timer" );
+      
 
         // Timer till next meal //
         setInterval( function() {
@@ -223,7 +266,7 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
               seconds2;
 
           var currentTime = Date.now();
-          var secondsLeft = ( interval - currentTime ) / 1000;
+              secondsLeft = ( interval - currentTime ) / 1000;
 
           // 86400 seconds in one day
           days        = parseInt( secondsLeft / 86400 );
@@ -241,8 +284,6 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
 
           // Meal time timer //
           if ( secondsLeft < 0 ) {
-
-            $scope.myValue  = false;
 
             var lunch       = Date.now();
             var secondsOn   = ( time2Eat - lunch ) / 1000;
@@ -266,6 +307,7 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
           }
 
         }, 1000);
+        
 
     }).
     error( function ( data, status, headers, config ) {

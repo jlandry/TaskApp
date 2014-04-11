@@ -27,10 +27,21 @@ ul.top-right-navbar li {
 /**************************
       * index.html
  **************************/
+/* line 24, ../../sass/style.scss */
+b, strong {
+  color: red;
+  font-size: 15px;
+}
+
+/* line 28, ../../sass/style.scss */
+li {
+  margin-bottom: 8px;
+}
+
 /**************************
       * signUp.html
  **************************/
-/* line 30, ../../sass/style.scss */
+/* line 36, ../../sass/style.scss */
 .sign-up-form {
   width: 80%;
   margin: auto;
@@ -39,13 +50,13 @@ ul.top-right-navbar li {
 /**************************
         * login.html
  **************************/
-/* line 39, ../../sass/style.scss */
+/* line 45, ../../sass/style.scss */
 .login-form {
   width: 80%;
   margin: auto;
 }
 
-/* line 43, ../../sass/style.scss */
+/* line 49, ../../sass/style.scss */
 .login-signup-btn {
   float: right;
 }
@@ -53,7 +64,7 @@ ul.top-right-navbar li {
 /**************************
       * dashboard.html
  **************************/
-/* line 52, ../../sass/style.scss */
+/* line 58, ../../sass/style.scss */
 .meal-form {
   width: 80%;
   margin: auto;
@@ -74,3 +85,9 @@ ul.top-right-navbar li {
 /**************************
         * Mobile
 ***************************/
+@media (max-width: 480px) {
+  /* line 108, ../../sass/style.scss */
+  #index-content {
+    margin-left: 3%;
+  }
+}

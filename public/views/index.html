@@ -1,10 +1,16 @@
 <div class='row'>
-	<div class="col-md-6 col-md-offset-4">
-		<h1>KINGTAK INDEX</h1>
-			<ul>
-				<li ng-repeat='post in posts'>
-					<span><b>{{ post.username }}</b> just ate a <b>{{ post.food }}</b> at <b>{{ post.eaten_On | date : "shortTime" }}</b> on <b>{{ post.eaten_On | date : "MMM"+ " " +"d"}}</b>!</span>
-				</li>
-			</ul>
+	<div id="index-content" class="col-md-6 col-md-offset-4">
+		<h2>Who Ate What:</h2>
+		<ul>
+			<li ng-repeat='post in posts'>
+				<span><b>{{ post.username }}</b> just ate <b>{{ post.food }}</b> at : <b>{{ post.eaten_On | date : "shortTime" }}</b> on <b>{{ post.eaten_On | date : "MMM"+ " " +"d"}}</b>!</span>
+			</li>
+		</ul>
+		<h2>Next Meals At:</h2>
+		<ul>
+			<li ng-repeat='user in users'>
+				<span><b>{{ user.username }}</b>'s next meal is at <b>{{ user.timeToNextMeal | date : "shortTime" }}</b>!</span>
+			</li>
+		</ul>
 	</div>
 </div>

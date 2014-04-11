@@ -11,6 +11,7 @@ var express = require('express');
 
 
 var mongoose	= require('mongoose');
+var Conn		= mongoose.connection;
 
 
 // connects to MongoDB //
@@ -78,9 +79,15 @@ exports.home = function ( req, res ) {
 
 			if ( err ) console.log( 'Error ' + err );
 
-			res.json( meals );
+			Users.find().exec( function ( err, users ) {
 
-	});
+				if ( err )  console.log( 'Error ' + err );
+
+				res.json({ meals : meals, users : users });
+
+			});
+
+		});
 
 };
 
@@ -239,35 +246,72 @@ exports.verifyLogin = function ( req, res ) {
 	var oldPassword	= req.body.password;
 
 	Users.findOne({ username : oldUser },
-		function ( err, user ) {
+	function ( err, user ) {
 
-			if ( err ) console.log( 'Error ' + err );
+		if ( err ) console.log( 'Error ' + err );
 
-			//console.log( "user = "+user );
+		//console.log( "user = "+user );
 
-			if ( user !== null && oldUser === user.username ) {
+		if ( user !== null && oldUser === user.username ) {
 
-				if ( user.password !== null && oldPassword === user.password ) {
+			if ( user.password !== null && oldPassword === user.password ) {
 
-					req.session.user = user;
-					res.json({ success : true });
-					return;
+				req.session.user = user;
+				res.json({ success : true });
 
-				} else {
+				Meals.find({ user_Id : req.session.user._id }).where("eaten_On").lt( new Date() ).
+				exec( function ( err, food ) {
 
-					console.log( 'Wrong Password' );
-					res.send( 'Wrong Password' );
+					var user			= req.session.user;
+					var joinedDate		= user.createdAt;
+					var today			= new Date();
+					var difference		= today - joinedDate;
+					var howManyDays		= parseInt( difference / 86400000 );
+					var mealsShouldHave	= howManyDays * user.numMeals;
 
-				}
+					if ( mealsShouldHave < food.length ) {
+
+						var numDicks	= mealsShouldHave - food.length;
+						var dicks		=  new Meals({
+
+							username	: user.username,
+							user_Id		: user.user_Id,
+							food		: "Dick",
+							eaten_On	: {
+
+								type	: Date,
+								default	: Date.now()
+
+							}
+
+						});
+
+						for (var i = 0; i < numDicks; i++) {
+
+							dicks.save();
+
+						}
+
+					}
+
+				});
+				return;
 
 			} else {
 
-				console.log( 'Wrong User Name' );
-				res.send( 'Wrong User Name' );
+				console.log( 'Wrong Password' );
+				res.send( 'Wrong Password' );
 
 			}
 
-		});
+		} else {
+
+			console.log( 'Wrong User Name' );
+			res.send( 'Wrong User Name' );
+
+		}
+
+	});
 
 };// exports.verifyLogin
 
@@ -306,6 +350,7 @@ exports.logout = function ( req, res ) {
 
 				if ( err ) console.log( 'Error ' + err );
 				res.json( meals );
+
 		});
 
 	}
@@ -318,27 +363,31 @@ exports.userTime = function ( req, res ) {
 
 	var startDay	= new Date();
 		startDay.setHours( 0,0,0,0 );
+
 	var endDay		= new Date();
 		endDay.setHours( 23,59,59,999 );
 
 	if ( req.session.user ) {
 
-		auth = true;
+		auth		= true;
+		var user	= req.session.user;
+
 		Meals.find({ user_Id : req.session.user._id }).where("eaten_On").gt( startDay ).lt( endDay ).sort('-eaten_On').
-			exec( function ( err, food ) {
+		exec( function ( err, food ) {
 
-				if ( err ) console.log( 'Error ' + err );
+			if ( err ) console.log( 'Error ' + err );
 
-				console.log("Meals is below:");
-				console.log(food);
-				res.json({ food : food, user : req.session.user });
+			if ( food.length <= user.numMeals ) {
+
+				res.json({ food : food, user : user });
+
+			}
 
 		});
 
 	}
 
 };
-
 
 // app.post( '/dashboard' ) //
 exports.userDashboard = function ( req, res ) {

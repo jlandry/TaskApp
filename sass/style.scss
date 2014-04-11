@@ -21,7 +21,13 @@ ul.top-right-navbar {
 /**************************
       * index.html
  **************************/
-
+b, strong {
+  color: red;
+  font-size: 15px;
+}
+li {
+  margin-bottom: 8px;
+}
 
 /**************************
       * signUp.html
@@ -99,4 +105,7 @@ ul.top-right-navbar {
 
 @media (max-width: 480px) {
 
+#index-content {
+  margin-left: 3%;
+}
 }// max-width 640px, small screens
