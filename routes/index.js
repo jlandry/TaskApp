@@ -324,14 +324,14 @@ exports.userTime = function ( req, res ) {
 	if ( req.session.user ) {
 
 		auth = true;
-		Meals.find({ user_Id : req.session.user._id }).where("eaten_On").gt( startDay ).lt( endDay ).
+		Meals.find({ user_Id : req.session.user._id }).where("eaten_On").gt( startDay ).lt( endDay ).sort('-eaten_On').
 			exec( function ( err, food ) {
 
 				if ( err ) console.log( 'Error ' + err );
 
 				console.log("Meals is below:");
 				console.log(food);
-				res.json({ food: food, user : req.session.user });
+				res.json({ food : food, user : req.session.user });
 
 		});
 

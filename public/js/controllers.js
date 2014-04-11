@@ -20,7 +20,6 @@ app.controller( 'MyAppCtrl', function ( $scope, $http, $location ) {
 
       $scope.posts = data;
 
-
     }).
     error( function ( data, status, headers, config ) {
 
@@ -120,9 +119,9 @@ app.controller( 'LoginCtrl', function ( $scope, $http, $location ) {
 
 app.controller('DashboardCtrl', function ( $scope, $http ) {
 
-  $scope.meals   = [];
-  $scope.userWho = null;
-  $scope.countDown = 0;
+  $scope.meals      = [];
+  $scope.userWho    = null;
+  $scope.countDown  = 0;
   
   mealList();
   timer();
@@ -186,6 +185,8 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
   // countdown clock till next meal //
   function timer() {
 
+    $scope.myValue = true;
+    
     $http({
 
       method  : 'GET',
@@ -198,12 +199,14 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
       console.log(data.user);
 
       console.log('inside timer(), data.food below:');
-      console.log(data.food);
+      var it = data.food[0].eaten_On;
+          it = new Date(it).getTime();
+      console.log( it );
 
       var totalMeals     = data.user.numMeals;
       var mealsEaten     = 0;
       var time2Eat       = Date.now() + 3600000;
-      var interval       = Date.now() + ( 360 * data.user.numHours );
+      var interval       = it + ( 3600000 * data.user.numHours );
       var timeLeft       = null;
       var timer          = angular.element( "#timer" );
 
@@ -239,19 +242,26 @@ app.controller('DashboardCtrl', function ( $scope, $http ) {
           // Meal time timer //
           if ( secondsLeft < 0 ) {
 
-            var lunch     = Date.now();
-            var secondsOn = ( time2Eat - lunch ) / 1000;
+            $scope.myValue  = false;
 
-            days2         = parseInt( secondsOn / 86400 );
-            secondsOn     = secondsOn % 86400;
+            var lunch       = Date.now();
+            var secondsOn   = ( time2Eat - lunch ) / 1000;
 
-            hours2        = parseInt( secondsOn / 3600 );
-            secondsOn     = secondsOn % 3600;
+            days2           = parseInt( secondsOn / 86400 );
+            secondsOn       = secondsOn % 86400;
 
-            minutes2      = parseInt( secondsOn / 60 );
-            seconds2      = parseInt( secondsOn % 60 );
+            hours2          = parseInt( secondsOn / 3600 );
+            secondsOn       = secondsOn % 3600;
 
-            timer.html( "Time to Eat : Minutes " + minutes2 + " | Seconds " + seconds2 );
+            minutes2        = parseInt( secondsOn / 60 );
+            seconds2        = parseInt( secondsOn % 60 );
+
+            timer.html( "Time to Eat : "+ minutes2 + " Minutes" + " & " + seconds2 + " Seconds" );
+
+            if ( secondsOn < 0 ) {
+
+
+            }
 
           }
 
